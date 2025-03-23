@@ -324,7 +324,7 @@ int main() {
                 break;  
             case 7:
                 printf("Keluar dari program.\n");
-                break;
+                break;
             default:
                 printf("Pilihan tidak valid!\n");
         }
