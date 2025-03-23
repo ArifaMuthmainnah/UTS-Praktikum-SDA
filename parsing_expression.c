@@ -256,6 +256,9 @@ void postfixToPrefix(char postfix[], char prefix[]) {
             push(&s, temp);
         }
     }
+
+    // Hasil akhir ada di top stack
+    strcpy(prefix, pop(&s));
 }
 
 // Fungsi utama
@@ -316,7 +319,7 @@ int main() {
             postfix[strlen(postfix) - 1] = '\0'; // Menghapus newline dari fgets
             postfixToPrefix(postfix, prefix);
             printf("Hasil Prefix: %s\n", prefix);
-            break;        
+            break;   
         default:
             printf("Pilihan tidak valid!\n");
     }
