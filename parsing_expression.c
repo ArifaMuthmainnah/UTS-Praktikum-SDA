@@ -114,6 +114,37 @@ void reverseString(char str[]) {
     }
 }
 
+// Fungsi untuk mengubah ekspresi Postfix ke Infix
+void postfixToInfix(char postfix[], char infix[]) {
+    Stack s;
+    initStack(&s);
+    char temp[MAX_SIZE];
+
+    for (int i = 0; postfix[i] != '\0'; i++) {
+        char ch = postfix[i];
+
+        if (isalnum(ch)) {
+            // Jika karakter adalah operand, push ke stack sebagai string
+            char operand[2] = {ch, '\0'};
+            push(&s, operand);
+        } else if (isOperator(ch)) {
+            // Jika karakter adalah operator, pop dua operand dari stack
+            char op1[MAX_SIZE], op2[MAX_SIZE];
+            strcpy(op1, pop(&s));
+            strcpy(op2, pop(&s));
+
+            // Gabungkan operand dengan operator dan tambahkan tanda kurung
+            sprintf(temp, "(%s%c%s)", op2, ch, op1);
+
+            // Push hasil gabungan kembali ke stack
+            push(&s, temp);
+        }
+    }
+
+    // Hasil akhir ada di top stack
+    strcpy(infix, pop(&s));
+}
+
 // Fungsi untuk mengubah ekspresi Infix ke Prefix
 void infixToPrefix(char infix[], char prefix[]) {
     // Balik infix
@@ -166,7 +197,13 @@ int main() {
             postfixToInfix(postfix, infix);
             printf("Hasil Infix: %s\n", infix);
             break;
-        
+        case 3:
+            printf("Masukkan ekspresi Infix: ");
+            fgets(infix, MAX_SIZE, stdin);
+            infix[strlen(infix) - 1] = '\0'; // Menghapus newline dari fgets
+            infixToPrefix(infix, prefix);
+            printf("Hasil Prefix: %s\n", prefix);
+            break;
         default:
             printf("Pilihan tidak valid!\n");
     }
