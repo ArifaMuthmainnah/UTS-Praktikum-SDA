@@ -166,6 +166,70 @@ void infixToPrefix(char infix[], char prefix[]) {
     reverseString(prefix);
 }
 
+// Fungsi untuk mengubah ekspresi Prefix ke Infix
+void prefixToInfix(char prefix[], char infix[]) {
+    Stack s;
+    initStack(&s);
+    int n = strlen(prefix);
+
+    for (int i = n - 1; i >= 0; i--) {
+        char ch = prefix[i];
+
+        if (isalnum(ch)) {
+            // Jika karakter adalah operand, push ke stack sebagai string
+            char operand[2] = {ch, '\0'};
+            push(&s, operand);
+        } else if (isOperator(ch)) {
+            // Jika karakter adalah operator, pop dua operand dari stack
+            char op1[MAX_SIZE], op2[MAX_SIZE];
+            strcpy(op1, pop(&s));
+            strcpy(op2, pop(&s));
+
+            // Gabungkan operand dengan operator dan tambahkan tanda kurung
+            char temp[MAX_SIZE];
+            sprintf(temp, "(%s%c%s)", op1, ch, op2);
+
+            // Push hasil gabungan kembali ke stack
+            push(&s, temp);
+        }
+    }
+
+    // Hasil akhir ada di top stack
+    strcpy(infix, pop(&s));
+}
+
+// Fungsi untuk mengubah ekspresi Prefix ke Postfix
+void prefixToPostfix(char prefix[], char postfix[]) {
+    Stack s;
+    initStack(&s);
+    int n = strlen(prefix);
+
+    for (int i = n - 1; i >= 0; i--) {
+        char ch = prefix[i];
+
+        if (isalnum(ch)) {
+            // Jika karakter adalah operand, push ke stack sebagai string
+            char operand[2] = {ch, '\0'};
+            push(&s, operand);
+        } else if (isOperator(ch)) {
+            // Jika karakter adalah operator, pop dua operand dari stack
+            char op1[MAX_SIZE], op2[MAX_SIZE];
+            strcpy(op1, pop(&s));
+            strcpy(op2, pop(&s));
+
+            // Gabungkan operand dengan operator
+            char temp[MAX_SIZE];
+            sprintf(temp, "%s%s%c", op1, op2, ch);
+
+            // Push hasil gabungan kembali ke stack
+            push(&s, temp);
+        }
+    }
+
+    // Hasil akhir ada di top stack
+    strcpy(postfix, pop(&s));
+}
+
 // Fungsi utama
 int main() {
     char infix[MAX_SIZE], postfix[MAX_SIZE], prefix[MAX_SIZE];
@@ -203,6 +267,20 @@ int main() {
             infix[strlen(infix) - 1] = '\0'; // Menghapus newline dari fgets
             infixToPrefix(infix, prefix);
             printf("Hasil Prefix: %s\n", prefix);
+            break;
+        case 4:
+            printf("Masukkan ekspresi Prefix: ");
+            fgets(prefix, MAX_SIZE, stdin);
+            prefix[strlen(prefix) - 1] = '\0'; // Menghapus newline dari fgets
+            prefixToInfix(prefix, infix);
+            printf("Hasil Infix: %s\n", infix);
+            break;
+        case 5:
+            printf("Masukkan ekspresi Prefix: ");
+            fgets(prefix, MAX_SIZE, stdin);
+            prefix[strlen(prefix) - 1] = '\0'; // Menghapus newline dari fgets
+            prefixToPostfix(prefix, postfix);
+            printf("Hasil Postfix: %s\n", postfix);
             break;
         default:
             printf("Pilihan tidak valid!\n");
