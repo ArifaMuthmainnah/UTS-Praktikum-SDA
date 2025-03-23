@@ -256,7 +256,7 @@ void postfixToPrefix(char postfix[], char prefix[]) {
             push(&s, temp);
         }
     }
-
+}
 
 // Fungsi utama
 int main() {
