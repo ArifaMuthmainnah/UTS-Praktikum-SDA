@@ -230,6 +230,34 @@ void prefixToPostfix(char prefix[], char postfix[]) {
     strcpy(postfix, pop(&s));
 }
 
+// Fungsi untuk mengubah ekspresi Postfix ke Prefix
+void postfixToPrefix(char postfix[], char prefix[]) {
+    Stack s;
+    initStack(&s);
+
+    for (int i = 0; postfix[i] != '\0'; i++) {
+        char ch = postfix[i];
+
+        if (isalnum(ch)) {
+            // Jika karakter adalah operand, push ke stack sebagai string
+            char operand[2] = {ch, '\0'};
+            push(&s, operand);
+        } else if (isOperator(ch)) {
+            // Jika karakter adalah operator, pop dua operand dari stack
+            char op1[MAX_SIZE], op2[MAX_SIZE];
+            strcpy(op1, pop(&s));
+            strcpy(op2, pop(&s));
+
+            // Gabungkan operand dengan operator
+            char temp[MAX_SIZE];
+            sprintf(temp, "%c%s%s", ch, op2, op1);
+
+            // Push hasil gabungan kembali ke stack
+            push(&s, temp);
+        }
+    }
+
+
 // Fungsi utama
 int main() {
     char infix[MAX_SIZE], postfix[MAX_SIZE], prefix[MAX_SIZE];
@@ -282,6 +310,13 @@ int main() {
             prefixToPostfix(prefix, postfix);
             printf("Hasil Postfix: %s\n", postfix);
             break;
+        case 6:
+            printf("Masukkan ekspresi Postfix: ");
+            fgets(postfix, MAX_SIZE, stdin);
+            postfix[strlen(postfix) - 1] = '\0'; // Menghapus newline dari fgets
+            postfixToPrefix(postfix, prefix);
+            printf("Hasil Prefix: %s\n", prefix);
+            break;        
         default:
             printf("Pilihan tidak valid!\n");
     }
