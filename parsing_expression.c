@@ -114,6 +114,27 @@ void reverseString(char str[]) {
     }
 }
 
+// Fungsi untuk mengubah ekspresi Infix ke Prefix
+void infixToPrefix(char infix[], char prefix[]) {
+    // Balik infix
+    reverseString(infix);
+
+    // Ubah '(' jadi ')' dan sebaliknya
+    for (int i = 0; infix[i] != '\0'; i++) {
+        if (infix[i] == '(') {
+            infix[i] = ')';
+        } else if (infix[i] == ')') {
+            infix[i] = '(';
+        }
+    }
+
+    // Konversi ke Postfix
+    infixToPostfix(infix, prefix);
+
+    // Balik hasil Postfix untuk mendapatkan Prefix
+    reverseString(prefix);
+}
+
 // Fungsi utama
 int main() {
     char infix[MAX_SIZE], postfix[MAX_SIZE], prefix[MAX_SIZE];
@@ -137,6 +158,13 @@ int main() {
             infix[strlen(infix) - 1] = '\0'; // Menghapus newline dari fgets
             infixToPostfix(infix, postfix);
             printf("Hasil Postfix: %s\n", postfix);
+            break;
+        case 2:
+            printf("Masukkan ekspresi Postfix: ");
+            fgets(postfix, MAX_SIZE, stdin);
+            postfix[strlen(postfix) - 1] = '\0'; // Menghapus newline dari fgets
+            postfixToInfix(postfix, infix);
+            printf("Hasil Infix: %s\n", infix);
             break;
         
         default:
