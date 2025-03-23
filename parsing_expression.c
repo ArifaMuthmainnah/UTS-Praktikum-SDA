@@ -274,6 +274,7 @@ int main() {
         printf("4. Prefix ke Infix\n");
         printf("5. Prefix ke Postfix\n");
         printf("6. Postfix ke Prefix\n");
+        printf("7. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &choice);
         getchar(); // Untuk menghapus newline setelah scanf
@@ -320,7 +321,10 @@ int main() {
                 postfix[strlen(postfix) - 1] = '\0'; // Menghapus newline dari fgets
                 postfixToPrefix(postfix, prefix);
                 printf("Hasil Prefix: %s\n", prefix);
-                break;   
+                break;  
+            case 7:
+                printf("Keluar dari program.\n");
+                break;
             default:
                 printf("Pilihan tidak valid!\n");
         }
