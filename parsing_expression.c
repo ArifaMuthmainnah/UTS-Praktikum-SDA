@@ -266,63 +266,65 @@ int main() {
     char infix[MAX_SIZE], postfix[MAX_SIZE], prefix[MAX_SIZE];
     int choice;
 
-    printf("Konversi Ekspresi Aritmatika\n");
-    printf("1. Infix ke Postfix\n");
-    printf("2. Postfix ke Infix\n");
-    printf("3. Infix ke Prefix\n");
-    printf("4. Prefix ke Infix\n");
-    printf("5. Prefix ke Postfix\n");
-    printf("6. Postfix ke Prefix\n");
-    printf("Pilih menu: ");
-    scanf("%d", &choice);
-    getchar(); // Untuk menghapus newline setelah scanf
-
-    switch (choice) {
-        case 1:
-            printf("Masukkan ekspresi Infix: ");
-            fgets(infix, MAX_SIZE, stdin);
-            infix[strlen(infix) - 1] = '\0'; // Menghapus newline dari fgets
-            infixToPostfix(infix, postfix);
-            printf("Hasil Postfix: %s\n", postfix);
-            break;
-        case 2:
-            printf("Masukkan ekspresi Postfix: ");
-            fgets(postfix, MAX_SIZE, stdin);
-            postfix[strlen(postfix) - 1] = '\0'; // Menghapus newline dari fgets
-            postfixToInfix(postfix, infix);
-            printf("Hasil Infix: %s\n", infix);
-            break;
-        case 3:
-            printf("Masukkan ekspresi Infix: ");
-            fgets(infix, MAX_SIZE, stdin);
-            infix[strlen(infix) - 1] = '\0'; // Menghapus newline dari fgets
-            infixToPrefix(infix, prefix);
-            printf("Hasil Prefix: %s\n", prefix);
-            break;
-        case 4:
-            printf("Masukkan ekspresi Prefix: ");
-            fgets(prefix, MAX_SIZE, stdin);
-            prefix[strlen(prefix) - 1] = '\0'; // Menghapus newline dari fgets
-            prefixToInfix(prefix, infix);
-            printf("Hasil Infix: %s\n", infix);
-            break;
-        case 5:
-            printf("Masukkan ekspresi Prefix: ");
-            fgets(prefix, MAX_SIZE, stdin);
-            prefix[strlen(prefix) - 1] = '\0'; // Menghapus newline dari fgets
-            prefixToPostfix(prefix, postfix);
-            printf("Hasil Postfix: %s\n", postfix);
-            break;
-        case 6:
-            printf("Masukkan ekspresi Postfix: ");
-            fgets(postfix, MAX_SIZE, stdin);
-            postfix[strlen(postfix) - 1] = '\0'; // Menghapus newline dari fgets
-            postfixToPrefix(postfix, prefix);
-            printf("Hasil Prefix: %s\n", prefix);
-            break;   
-        default:
-            printf("Pilihan tidak valid!\n");
-    }
-
+    do{
+        printf("Konversi Ekspresi Aritmatika\n");
+        printf("1. Infix ke Postfix\n");
+        printf("2. Postfix ke Infix\n");
+        printf("3. Infix ke Prefix\n");
+        printf("4. Prefix ke Infix\n");
+        printf("5. Prefix ke Postfix\n");
+        printf("6. Postfix ke Prefix\n");
+        printf("Pilih menu: ");
+        scanf("%d", &choice);
+        getchar(); // Untuk menghapus newline setelah scanf
+    
+        switch (choice) {
+            case 1:
+                printf("Masukkan ekspresi Infix: ");
+                fgets(infix, MAX_SIZE, stdin);
+                infix[strlen(infix) - 1] = '\0'; // Menghapus newline dari fgets
+                infixToPostfix(infix, postfix);
+                printf("Hasil Postfix: %s\n", postfix);
+                break;
+            case 2:
+                printf("Masukkan ekspresi Postfix: ");
+                fgets(postfix, MAX_SIZE, stdin);
+                postfix[strlen(postfix) - 1] = '\0'; // Menghapus newline dari fgets
+                postfixToInfix(postfix, infix);
+                printf("Hasil Infix: %s\n", infix);
+                break;
+            case 3:
+                printf("Masukkan ekspresi Infix: ");
+                fgets(infix, MAX_SIZE, stdin);
+                infix[strlen(infix) - 1] = '\0'; // Menghapus newline dari fgets
+                infixToPrefix(infix, prefix);
+                printf("Hasil Prefix: %s\n", prefix);
+                break;
+            case 4:
+                printf("Masukkan ekspresi Prefix: ");
+                fgets(prefix, MAX_SIZE, stdin);
+                prefix[strlen(prefix) - 1] = '\0'; // Menghapus newline dari fgets
+                prefixToInfix(prefix, infix);
+                printf("Hasil Infix: %s\n", infix);
+                break;
+            case 5:
+                printf("Masukkan ekspresi Prefix: ");
+                fgets(prefix, MAX_SIZE, stdin);
+                prefix[strlen(prefix) - 1] = '\0'; // Menghapus newline dari fgets
+                prefixToPostfix(prefix, postfix);
+                printf("Hasil Postfix: %s\n", postfix);
+                break;
+            case 6:
+                printf("Masukkan ekspresi Postfix: ");
+                fgets(postfix, MAX_SIZE, stdin);
+                postfix[strlen(postfix) - 1] = '\0'; // Menghapus newline dari fgets
+                postfixToPrefix(postfix, prefix);
+                printf("Hasil Prefix: %s\n", prefix);
+                break;   
+            default:
+                printf("Pilihan tidak valid!\n");
+        }
+    } while (choice != 7);
+        
     return 0;
 }
